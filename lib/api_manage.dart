@@ -30,11 +30,12 @@ class ApiManager {
 
  //https://newsapi.org/v2/everything?q=bitcoin&apiKey=7233c0773f0b4b9db78e87e5dd28d681
 
-static  Future<NewsResponse> getNews(String sourceId) async{
+static  Future<NewsResponse> getNews({String? sourceId , String? searchKeyWord}) async{
     var url = Uri.https(baseUser,'/v2/everything',
     {
       'apiKey' : '7233c0773f0b4b9db78e87e5dd28d681' ,
-      'sources' : sourceId
+      'sources' : sourceId ,
+      'q' : searchKeyWord
     }
     );
     try{

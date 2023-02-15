@@ -124,7 +124,6 @@ class _NewsItemContentState extends State<NewsItemContent> {
     }
     var uri = Uri.parse(url) ;
     if (await canLaunchUrl(uri) ){
-      print(canLaunchUrl(uri));
       await launchUrl(uri);
     }
   }

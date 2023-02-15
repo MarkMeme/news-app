@@ -30,7 +30,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             AppLocalizations.of(context)!.pickYourCategoryofinterest,
             style: Theme.of(context).textTheme.subtitle1,
           ),
-          SizedBox(
+          const SizedBox(
             height: 13,
           ),
           Expanded(
