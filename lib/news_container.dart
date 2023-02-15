@@ -19,7 +19,7 @@ class _NewsContainerState extends State<NewsContainer> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<NewsResponse>(
-        future: ApiManager.getNews(widget.selectedSource.id ?? ''),
+        future: ApiManager.getNews(sourceId: widget.selectedSource.id ?? ''),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
