@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:news_app/news_container.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'my_theme_data.dart';
 
 class NewsItemContent extends StatefulWidget {
@@ -41,7 +42,7 @@ class _NewsItemContentState extends State<NewsItemContent> {
                           bottomLeft: Radius.circular(35),
                           bottomRight: Radius.circular(35)))),
               body: Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -74,7 +75,7 @@ class _NewsItemContentState extends State<NewsItemContent> {
                           color: MyThemeData.blackColor),
                     ),
                     const SizedBox(
-                      height: 8,
+                      height: 12,
                     ),
                     Text(
                       args.news.publishedAt ?? '',
@@ -83,7 +84,7 @@ class _NewsItemContentState extends State<NewsItemContent> {
                       textAlign: TextAlign.end,
                     ),
                     const SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     Text(
                       args.news.content ?? '',
@@ -91,18 +92,23 @@ class _NewsItemContentState extends State<NewsItemContent> {
                           fontSize: 17, color: MyThemeData.blackColor),
                     ),
                     const SizedBox(
-                      height: 8,
+                      height: 25,
                     ),
                     InkWell(
                       onTap: () {
-                       // url launch
+                       launchingUrl(args.news.url);
                       }
                       ,
-                      child: Text(
-                        'more >',
-                        style: TextStyle(
-                            fontSize: 16, color: MyThemeData.blackColor),
-                        textAlign: TextAlign.end,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Read more ',
+                            style: TextStyle(
+                                fontSize: 16, color: MyThemeData.blackColor),
+                          ),
+                          const Icon(Icons.arrow_forward,size: 19,)
+                        ],
                       ),
                     ),
                   ],
@@ -110,6 +116,16 @@ class _NewsItemContentState extends State<NewsItemContent> {
               )
           )
         ]);
+  }
+
+  launchingUrl(String? url) async {
+    if (url == null){
+      return ;
+    }
+    var uri = Uri.parse(url) ;
+    if (await canLaunchUrl(uri) ){
+      await launchUrl(uri);
+    }
   }
 
 
